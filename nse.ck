@@ -1,4 +1,4 @@
-//NanoKontrol2 nano;
+NanoKontrol2 nano;
 
 2 => int NUM;
 
