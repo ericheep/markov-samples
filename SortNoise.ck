@@ -59,25 +59,6 @@ class SortNoise extends Chugen {
         return arr;
     }
 
-    fun void similarityReset() {
-        0 => int ratio;
-        for (0 => int i; i < size; i++) {
-            if (prevChain[i] == chain[i]) {
-                ratio++;
-            }
-        }
-        <<< ratio/(size$float) >>>;
-        if (ratio/size == 1) {
-            for (0 => int i; i < size; i++) {
-                Math.random2(0, range - 1) => chain[i];
-            }
-            for (0 => int i; i < range; i++) {
-                //(0.5/range * i + 0.25/range) => values[i];
-                Math.random2f(0, step) => values[i];
-            }
-        }
-    }
-
     // sorts chain until it is sorted
     fun void sort() {
         0 => int pos;
@@ -87,7 +68,6 @@ class SortNoise extends Chugen {
             if (pos == 0) {
                 chain @=> prevChain;
                 bubble(chain) @=> chain;
-                similarityReset();
             }
             1::samp => now;
         }
@@ -136,7 +116,7 @@ class SortNoise extends Chugen {
 
 
 SortNoise nois => Pan2 pan1 => dac;
-nois.setSize(520);
+nois.setSize(1520);
 nois.setStep(0.1);
 nois.setRange(13);
 nois.calculate();
