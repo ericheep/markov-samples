@@ -16,8 +16,10 @@ for (0 => int i; i < NUM; i++) {
     markov[i].setRange(6);
     markov[i].setSize(1000);
     markov[i].setOrder(1);
-
     markov[i].calculate();
+
+    spork ~ markov[i].feedback();
+
     markov[i] => markovPan[i] => dac;;
     sort[i] => sortPan[i] => dac;
     rapid[i] => rapidPan[i] => dac;

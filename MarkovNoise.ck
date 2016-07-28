@@ -100,7 +100,7 @@ public class MarkovNoise extends Chugen {
         }
     }
 
-    spork ~feedback();
+    // spork ~feedback();
 
     // reflects values back over thresholds
     fun float reflect(float in, float max, float min) {
