@@ -1,7 +1,7 @@
 // RapidNoise.ck
 // Eric Heep
 
-class RapidNoise extends Chugen {
+public class RapidNoise extends Chugen {
 
     1470 => int size;
     30 => int range;

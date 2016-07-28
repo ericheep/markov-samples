@@ -1,9 +1,9 @@
-// NoiseKov.ck
+// MarkovNoise.ck
 // Eric Heep
 
 Markov markov;
 
-class MarkovNoise extends Chugen {
+public class MarkovNoise extends Chugen {
 
     // default params
     12 => int range;
@@ -15,6 +15,14 @@ class MarkovNoise extends Chugen {
     float transitionMatrix[0][0];
     int prevChain[size];
     float values[range];
+
+    for (0 => int i; i < size; i++) {
+        Math.random2(0, range - 1) => chain[i];
+    }
+    for (0 => int i; i < range; i++) {
+        //(0.5/range * i + 0.25/range) => values[i];
+        Math.random2f(0.0, step) => values[i];
+    }
 
     // setters
     fun void setStep(float s) {
@@ -145,3 +153,4 @@ nois.calculate();
 
 1::hour => now;
 */
+

@@ -1,7 +1,7 @@
 // SortNoise.ck
 // Eric Heep
 
-class SortNoise extends Chugen {
+public class SortNoise extends Chugen {
 
     1470 => int size;
     30 => int range;
@@ -114,7 +114,7 @@ class SortNoise extends Chugen {
     }
 }
 
-
+/*
 SortNoise nois => Pan2 pan1 => dac;
 nois.setSize(1520);
 nois.setStep(0.1);
@@ -122,3 +122,4 @@ nois.setRange(13);
 nois.calculate();
 
 14::second => now;
+*/
