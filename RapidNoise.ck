@@ -1,7 +1,7 @@
-// UghNoise.ck
+// RapidNoise.ck
 // Eric Heep
 
-class UghNoise extends Chugen {
+class RapidNoise extends Chugen {
 
     1470 => int size;
     30 => int range;
@@ -73,10 +73,19 @@ class UghNoise extends Chugen {
     }
 }
 
+/*
 UghNoise nois => Pan2 pan1 => dac;
-nois.setSize(4410);
-nois.setStep(0.125);
-nois.setRange(50);
+nois.setSize(22050);
+nois.setStep(0.01);
+nois.setRange(13);
 nois.calculate();
 
-1::hour => now;
+4::second => now;
+nois.calculate();
+4::second => now;
+nois.calculate();
+4::second => now;
+nois.calculate();
+4::second => now;
+*/
+
