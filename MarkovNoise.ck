@@ -3,7 +3,7 @@
 
 Markov markov;
 
-class NoiseKov extends Chugen {
+class MarkovNoise extends Chugen {
 
     // default params
     12 => int range;
@@ -133,7 +133,8 @@ class NoiseKov extends Chugen {
     }
 }
 
-NoiseKov nois => Pan2 pan1 => dac;
+/*
+MarkovNoise nois => Pan2 pan1 => dac;
 
 nois.setStep(0.1);
 nois.setRange(6);
@@ -143,3 +144,4 @@ nois.setOrder(1);
 nois.calculate();
 
 1::hour => now;
+*/
