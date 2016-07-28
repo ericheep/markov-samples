@@ -74,7 +74,7 @@ public class RapidNoise extends Chugen {
 }
 
 /*
-UghNoise nois => Pan2 pan1 => dac;
+RapidNoise nois => Pan2 pan1 => dac;
 nois.setSize(22050);
 nois.setStep(0.01);
 nois.setRange(13);
