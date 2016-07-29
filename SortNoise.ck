@@ -16,6 +16,10 @@ public class SortNoise extends Chugen {
         s => step;
     }
 
+    fun void setMaxSize(int s) {
+        s => size => chain.size;
+    }
+
     fun void setSize(int s) {
         s => size => chain.size;
     }

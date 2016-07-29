@@ -3,11 +3,12 @@
 
 public class RapidNoise extends Chugen {
 
-    1470 => int size;
+    1470 => int maxSize;
+    1.0 => float ratioSize;
     30 => int range;
     0.4 => float step;
 
-    int chain[size];
+    int chain[maxSize];
     float values[range];
 
     // setters
@@ -15,8 +16,13 @@ public class RapidNoise extends Chugen {
         s => step;
     }
 
-    fun void setSize(int s) {
-        s => size => chain.size;
+    fun void setMaxSize(int s) {
+        s => maxSize => chain.size;
+    }
+
+    fun void setRatioSize(float s) {
+        Std.clampf(s, 0.0, 1.0) => s;
+        s * 0.95 + 0.05 => ratioSize;
     }
 
     fun void setRange(int r) {
@@ -25,7 +31,7 @@ public class RapidNoise extends Chugen {
 
     // required
     fun void calculate() {
-        for (0 => int i; i < size; i++) {
+        for (0 => int i; i < maxSize; i++) {
             Math.random2(0, range - 1) => chain[i];
         }
         for (0 => int i; i < range; i++) {
@@ -54,7 +60,7 @@ public class RapidNoise extends Chugen {
     // tick, where the dsp happens
     fun float tick (float in) {
         values[chain[tickPos]] => float bump;
-        (tickPos + 1) % size => tickPos;
+        (tickPos + 1) % (maxSize * ratioSize)$int => tickPos;
 
         if (dir) {
             value + bump => value;

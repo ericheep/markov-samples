@@ -1,12 +1,11 @@
 // MarkovNoise.ck
 // Eric Heep
 
-Markov markov;
-
 public class MarkovNoise extends Chugen {
+    Markov markov;
 
     // default params
-    12 => int range;
+    6 => int range;
     1 => int order;
     1470 => int size;
     1.0 => float step;
@@ -53,54 +52,49 @@ public class MarkovNoise extends Chugen {
         for (0 => int i; i < size; i++) {
             Math.random2(0, range - 1) => chain[i];
         }
+        markov.generateTransitionMatrix(chain, order, range) @=> transitionMatrix;
         for (0 => int i; i < range; i++) {
-            //(0.5/range * i + 0.25/range) => values[i];
             Math.random2f(0.0, step) => values[i];
         }
         markov.generateCombinations(order, range);
         markov.generateTransitionMatrix(chain, order, range) @=> transitionMatrix;
     }
 
-    // compares chain to previous chain, if it is exactly similiar
-    // then everything is reset
-    fun void similarityReset() {
+    // compares chain to previous chain
+    fun int similarity() {
         0 => int ratio;
         for (0 => int i; i < size; i++) {
             if (prevChain[i] == chain[i]) {
                 ratio++;
             }
         }
-        //<<< ratio/(size$float) >>>;
         if (ratio/size == 1) {
-            for (0 => int i; i < size; i++) {
-                Math.random2(0, range - 1) => chain[i];
-            }
-            for (0 => int i; i < range; i++) {
-                //(0.5/range * i + 0.25/range) => values[i];
-                Math.random2f(-0.2, 0.2) => values[i];
-            }
-            markov.generateTransitionMatrix(chain, order, range) @=> transitionMatrix;
+            return 1;
+        }
+        else {
+            return 0;
         }
     }
 
-    // feeds chain back into transition matrix to create a new chain,
-    // then creates a new transition matrix from that chain
-    fun void feedback() {
+    // analyzes until redundant
+    fun void analyze() {
         0 => int pos;
-        while (true) {
+        0 => int flag;
+        while (flag == 0) {
             (pos + 1) % size => pos;
-
             if (pos == 0) {
                 chain @=> prevChain;
                 markov.generateChain(chain, transitionMatrix, order, range) @=> chain;
                 markov.generateTransitionMatrix(chain, order, range) @=> transitionMatrix;
-                similarityReset();
+                if(similarity()) {
+                    calculate();
+                };
             }
             1::samp => now;
         }
     }
 
-    // spork ~feedback();
+    spork ~analyze();
 
     // reflects values back over thresholds
     fun float reflect(float in, float max, float min) {
