@@ -1,4 +1,6 @@
-[0.1, -0.2, 0.4, 0.2, 0.3, -0.6] @=> float arr[];
+SinOsc sin => dac;
+1::hour => now;
+/*[0.1, -0.2, 0.4, 0.2, 0.3, -0.6] @=> float arr[];
 
 fun float[] bubble(float arr[]) {
     1 => int flag;
@@ -28,7 +30,6 @@ bubble(arr) @=> arr;
 
 <<< arr[0], arr[1], arr[2], arr[3], arr[4], arr[5] >>>;
 
-/*
 void BubbleSort(apvector <int> &num)
 {
       int i, j, flag = 1;    // set flag to 1 to start first pass
